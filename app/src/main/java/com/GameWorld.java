@@ -9,7 +9,7 @@ public class GameWorld {
     private int worldWidth;
     private Cell[][] world;
     private Player player;
-    private Scanner scanner;
+    private final Scanner input;
     private boolean gameRunning;
 
     // Contructor
@@ -17,7 +17,7 @@ public class GameWorld {
         this.worldHeight = 0;
         this.worldWidth = 0;
         this.player = new Player();
-        this.scanner = new Scanner(System.in);
+        this.input = new Scanner(System.in);
         this.gameRunning = false;
     }
 
@@ -118,6 +118,9 @@ public class GameWorld {
 
     // Methods
     public void printWorld() {
+        // Clear the console to make it appear as if the world is printed over the previous one
+        clearConsole();
+        
         for (int i = 0; i < this.worldHeight; i++) {
             for (int j = 0; j < this.worldWidth; j++) {
                 // Check if player is at this position
@@ -127,28 +130,30 @@ public class GameWorld {
                     Cell.Type cellType = world[i][j].getOccupationType();
 
                     switch (cellType) {
-                        case WALL:
-                            System.out.print("# "); // Block character for wall
-                            break;
-                        case COIN:
-                            System.out.print("0 "); // Circle for coin
-                            break;
-                        case EXIT:
-                            System.out.print("E "); // E for exit
-                            break;
-                        case PATH:
-                            System.out.print("_ "); // Dot for empty space
-                            break;
-                        case ENTITY:
-                            System.out.print("@ "); // @ for entity
-                            break;
-                        default:
-                            System.out.print("? "); // Unknown type
-                            break;
+                        case WALL -> System.out.print("# "); // Block character for wall
+                        case COIN -> System.out.print("0 "); // Circle for coin
+                        case EXIT -> System.out.print("E "); // E for exit
+                        case PATH -> System.out.print("_ "); // Dot for empty space
+                        case ENTITY -> System.out.print("@ "); // @ for entity
+                        default -> System.out.print("? "); // Unknown type
                     }
                 }
             }
             System.out.println();
+        }
+    }
+    
+    // Method to clear the console using ANSI escape codes (works on most modern terminals)
+    public static void clearConsole() {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (java.io.IOException | InterruptedException e) {
+            // fallback or silent
         }
     }
 
@@ -160,63 +165,43 @@ public class GameWorld {
     }
 
     public void startGame() {
-        gameRunning = true;
-        System.out.println("Welcome to the Maze Game!");
-        System.out.println("Find the exit (E) while collecting coins (0)!");
-        System.out.println();
-
-        while (gameRunning) {
-            printWorld();
-            printGameState();
-
-            String input = scanner.nextLine().toLowerCase();
-
-            if (input.equals("q")) {
-                System.out.println("Game ended by player.");
-                break;
-            }
-
-            processInput(input);
-
-            // Check win condition
-            if (checkWinCondition()) {
-                endGame(true);
-                break;
+        try (input) {
+            gameRunning = true;
+            System.out.println("Welcome to the Maze Game!");
+            System.out.println("Find the exit (E) while collecting coins (0)!");
+            System.out.println();
+            
+            while (gameRunning) {
+                printWorld();
+                printGameState();
+                
+                String inputString = input.nextLine().toLowerCase();
+                
+                if (inputString.equals("q")) {
+                    System.out.println("Game ended by player.");
+                    break;
+                }
+                
+                processInput(inputString);
+                
+                // Check win condition
+                if (checkWinCondition()) {
+                    endGame(true);
+                    break;
+                }
             }
         }
-
-        scanner.close();
     }
 
-    private void processInput(String input) {
+    private void processInput(String inputString) {
         int oldRow = player.getRow();
         int oldCol = player.getCol();
         boolean moved = false;
 
-        switch (input) {
-            case "w":
-                if (player.moveUp()) {
-                    moved = true;
-                }
-                break;
-            case "s":
-                if (player.moveDown()) {
-                    moved = true;
-                }
-                break;
-            case "a":
-                if (player.moveLeft()) {
-                    moved = true;
-                }
-                break;
-            case "d":
-                if (player.moveRight()) {
-                    moved = true;
-                }
-                break;
-            default:
-                System.out.println("Invalid input! Use W/A/S/D to move or Q to quit.");
-                return;
+        try {
+            moved = player.move(inputString.charAt(0));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input! Use W/A/S/D to move or Q to quit.");
         }
 
         if (moved) {
