@@ -1,15 +1,18 @@
-
 public class Entity {
     
     // Properties
     public int x;
     public int y;
 
+    // Constructors
+    public Entity() {
+        
+    }
+
     // Accessors
     public int getX() {
         return this.x;
     }
-
     public int getY() {
         return this.y;
     }
@@ -17,7 +20,6 @@ public class Entity {
     public void setX(int x) {
         this.x = x;
     }
-
     public void setY(int y) {
         this.y = y;
     }
