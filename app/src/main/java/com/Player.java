@@ -61,13 +61,13 @@ public class Player extends Entity{
 
             for (int i = 0; i < speed; i++)
             {
-                int[] dach2 = move(direction);
+                int[] dash2 = move(direction);
                 setX(dash2[getX()]);
                 setY(dash2[getY()]);
 
                 if (occupied = false)
                 {
-                    int[] dach2 = move(direction);
+                    int[] dash2 = move(direction);
                     setX(dash2[getX()]);
                     setY(dash2[getY()]);
                 }
