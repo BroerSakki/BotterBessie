@@ -2,9 +2,11 @@ package com;
 
 public class Enemy {
 
+    // Properties
     public int x;
     public int y;
 
+    // Accessors
     public int getX() {
         return this.x;
     }
@@ -13,7 +15,16 @@ public class Enemy {
         return this.y;
     }
 
-    public int beweeg() {
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    // Methods
+    public int beweeg(GameWorld world) {
         System.out.print("Walking");
         return 0;
     }
