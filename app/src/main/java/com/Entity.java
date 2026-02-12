@@ -1,3 +1,4 @@
+package com;
 public class Entity {
     
     // Properties
@@ -6,7 +7,7 @@ public class Entity {
 
     // Constructors
     public Entity() {
-        
+
     }
 
     // Accessors
