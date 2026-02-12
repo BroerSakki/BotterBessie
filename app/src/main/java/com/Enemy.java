@@ -24,7 +24,7 @@ public class Enemy {
     }
 
     // Methods
-    public int beweeg(GameWorld world) {
+    public int move(GameWorld world) {
         System.out.print("Walking");
         return 0;
     }
