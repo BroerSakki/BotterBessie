@@ -2,8 +2,24 @@ package com;
 
 public class Cell {
 
+    public enum Type {
+        PATH,
+        WALL,
+        COIN,
+        EXIT,
+        ENTITY
+    }
+
     // Properties
-    public boolean occupied;
+    private boolean occupied;
+
+    private Type occupationType;
+
+    // Constructor
+    public Cell() {
+        this.occupied = false;
+        this.occupationType = Type.PATH;
+    }
 
     // Accessors
     public boolean getOccupied() {
@@ -12,6 +28,14 @@ public class Cell {
 
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
+    }
+
+    public Type getOccupationType() {
+        return this.occupationType;
+    }
+
+    public void setOccupationType(Type type) {
+        this.occupationType = type;
     }
 
     // Methods
