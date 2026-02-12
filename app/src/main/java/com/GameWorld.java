@@ -97,16 +97,16 @@ public class GameWorld {
 
                 switch (cellType) {
                     case WALL:
-                        System.out.print("█ "); // Block character for wall
+                        System.out.print("# "); // Block character for wall
                         break;
                     case COIN:
-                        System.out.print("● "); // Circle for coin
+                        System.out.print("0 "); // Circle for coin
                         break;
                     case EXIT:
                         System.out.print("E "); // E for exit
                         break;
                     case PATH:
-                        System.out.print("· "); // Dot for empty space
+                        System.out.print("_ "); // Dot for empty space
                         break;
                     case ENTITY:
                         System.out.print("@ "); // @ for entity
