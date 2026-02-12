@@ -11,7 +11,7 @@ public class WorldTest {
 
         // Print the generated world
         System.out.println("Generated World (10x10):");
-        System.out.println("█ = Wall, ● = Coin, E = Exit, · = Path");
+        System.out.println("# = Wall, 0 = Coin, E = Exit, _ = Path");
         System.out.println();
         world.printWorld();
 
