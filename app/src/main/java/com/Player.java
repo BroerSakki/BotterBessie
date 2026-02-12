@@ -1,38 +1,33 @@
 package com;
 
-public class Player {
+public class Player extends Entity{
 
-    private String move;
+    //private String move;
     private int health ;
     private int stamina;
     private String dash;
 
+    //Konstructers
     public Player()
     {
-        this("",0,0,"");
+        this(0,0,"");
     }
 
-    public Player(String move,int health,int stamina,String dash)
+    public Player(int health,int stamina,String dash)
     {
-        setMove(move);
-    }
+        setHealth(health);
+        setStamina(stamina);
+        setDash(dash);
 
-    public void setMove(String move)
-    {
-        this.move = move;
-    }
-
-    public String getMove() 
-    {
-        return move;
     }
     
+    //Accessors
     public void setHealth(int health)
     {
         this.health = health;
     }
 
-    public String getHealth() 
+    public int getHealth() 
     {
         return health;
     }
@@ -42,7 +37,7 @@ public class Player {
         this.stamina = stamina;
     }
 
-    public String getStamina() 
+    public int getStamina() 
     {
         return stamina;
     }
@@ -56,5 +51,33 @@ public class Player {
     {
         return dash;
     }
+
+    //Dash
+    public void dash(int speed, int direction)
+    {
+        if(stamina >= 2)
+        {
+            stamina = 0;
+
+            for (int i = 0; i < speed; i++)
+            {
+                int[] dach2 = move(direction);
+                setX(dash2[getX()]);
+                setY(dash2[getY()]);
+
+                if (occupied = false)
+                {
+                    int[] dach2 = move(direction);
+                    setX(dash2[getX()]);
+                    setY(dash2[getY()]);
+                }
+            }
+
+
+        }
+        
+        
+    }
+
     
 }
