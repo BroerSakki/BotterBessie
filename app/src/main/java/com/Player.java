@@ -1,60 +1,71 @@
- package com;
+package com;
 
- public class Player {
+public class Player {
 
-//     private String move;
-//     private int health ;
-//     private int stamina;
-//     private String dash;
+    private int row;
+    private int col;
+    private int score;
+    private boolean hasWon;
 
-//     public Player()
-//     {
-//         this("",0,0,"");
-//     }
+    public Player() {
+        this.row = 0;
+        this.col = 0;
+        this.score = 0;
+        this.hasWon = false;
+    }
 
-//     public Player(String move,int health,int stamina,String dash)
-//     {
-//         setMove(move);
-//     }
+    public int getRow() {
+        return row;
+    }
 
-//     public void setMove(String move)
-//     {
-//         this.move = move;
-//     }
+    public int getCol() {
+        return col;
+    }
 
-//     public String getMove() 
-//     {
-//         return move;
-//     }
-    
-//     public void setHealth(int health)
-//     {
-//         this.health = health;
-//     }
+    public void setPosition(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
 
-//     public String getHealth() 
-//     {
-//         return health;
-//     }
+    public int getScore() {
+        return score;
+    }
 
-//     public void setStamina(int stamina)
-//     {
-//         this.stamina = stamina;
-//     }
+    public void addScore(int points) {
+        this.score += points;
+    }
 
-//     public String getStamina() 
-//     {
-//         return stamina;
-//     }
+    public boolean hasWon() {
+        return hasWon;
+    }
 
-//     public void setDash(String dash)
-//     {
-//         this.dash = dash;
-//     }
+    public void setWon(boolean won) {
+        this.hasWon = won;
+    }
 
-//     public String getDash() 
-//     {
-//         return dash;
-//     }
-    
- }
+    public boolean moveUp() {
+        if (row > 0) {
+            row--;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean moveDown() {
+        row++;
+        return true;
+    }
+
+    public boolean moveLeft() {
+        if (col > 0) {
+            col--;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean moveRight() {
+        col++;
+        return true;
+    }
+}
