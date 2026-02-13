@@ -54,4 +54,9 @@ public class Cell {
     public void setOccupationType(Type type) {
         this.occupationType = type;
     }
+
+    @Override
+    public String toString() {
+        return getOccupationType() + " ";
+    }
 }
