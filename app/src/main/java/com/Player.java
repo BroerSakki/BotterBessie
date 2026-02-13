@@ -7,33 +7,24 @@ public class Player extends Entity {
     // Properties
     private int score;
     private boolean hasWon;
-    private char icon;
-    private String color;
 
     // Constructors
     public Player() {
-        this.row = 0;
-        this.col = 0;
+        this('@', Ansi.BLUE);
+    }
+    public Player(char icon, String style) {
+        super(icon, style);
         this.score = 0;
         this.hasWon = false;
-        this.icon = '@';
-        this.color = Ansi.BLUE;
     }
 
     // Accessors}
     public void setWon(boolean won) {
         this.hasWon = won;
     }
-    public void setPosition(int row, int col) {
-        this.row = row;
-        this.col = col;
-    }
 
     public int getScore() {
         return score;
-    }
-    public String getIcon() {
-        return Ansi.format(color, icon);
     }
 
     public void addScore(int points) {
