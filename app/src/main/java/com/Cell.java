@@ -8,7 +8,7 @@ public class Cell {
         PATH(Ansi.format(Ansi.BG_GREEN, '_')),
         WALL(Ansi.format(Ansi.WHITE, '#')),
         COIN(Ansi.format(Ansi.YELLOW, '0')),
-        EXIT(Ansi.format(Ansi.BG_BLUE, 'E')),
+        GOAL(Ansi.format(Ansi.BG_BLUE, 'E')),
         ENTITY(Ansi.format(Ansi.BLUE, '@'));
 
         private final String value;

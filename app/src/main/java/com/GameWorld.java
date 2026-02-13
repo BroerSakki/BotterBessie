@@ -79,7 +79,7 @@ public class GameWorld {
                     // Exit (not occupied) - but only place one exit total
                     if (!exitPlaced) {
                         world[i][j].setOccupied(false);
-                        world[i][j].setOccupationType(Cell.Type.EXIT);
+                        world[i][j].setOccupationType(Cell.Type.GOAL);
                         exitPlaced = true;
                     } else {
                         // If exit already placed, make this a path instead
@@ -96,7 +96,7 @@ public class GameWorld {
             int exitRow = random.nextInt(worldHeight);
             int exitCol = random.nextInt(worldWidth);
             world[exitRow][exitCol].setOccupied(false);
-            world[exitRow][exitCol].setOccupationType(Cell.Type.EXIT);
+            world[exitRow][exitCol].setOccupationType(Cell.Type.GOAL);
         }
     }
 
@@ -222,7 +222,7 @@ public class GameWorld {
 
     private boolean checkWinCondition() {
         Cell.Type cellType = world[player.getRow()][player.getCol()].getOccupationType();
-        return cellType == Cell.Type.EXIT;
+        return cellType == Cell.Type.GOAL;
     }
 
     private void endGame(boolean won) {
