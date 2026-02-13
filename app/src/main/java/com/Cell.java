@@ -1,13 +1,16 @@
 package com;
 
 import com.utils.Ansi;
+import com.utils.Coin;
+import com.utils.Path;
+import com.utils.Wall;
 
 public class Cell {
 
     public enum Type {
-        PATH(Ansi.format(Ansi.BG_GREEN, '_')),
-        WALL(Ansi.format(Ansi.WHITE, '#')),
-        COIN(Ansi.format(Ansi.YELLOW, '0')),
+        PATH(new Path().toString()),
+        WALL(new Wall().toString()),
+        COIN(new Coin().toString()),
         GOAL(Ansi.format(Ansi.BG_BLUE, 'E')),
         ENTITY(Ansi.format(Ansi.BLUE, '@'));
 
@@ -57,6 +60,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return getOccupationType() + " ";
+        return getOccupationType().toString();
     }
 }
