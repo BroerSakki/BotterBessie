@@ -1,12 +1,20 @@
 package com;
-public class Entity {
+
+import com.utils.Ansi;
+import com.utils.Node;
+
+public class Entity extends Node {
     
     // Properties
-    public int row;
-    public int col;
+    private  int row;
+    private int col;
 
     // Constructors
     public Entity() {
+        this('@', Ansi.BLUE);
+    }
+    public Entity(char icon, String style) {
+        super(icon, style);
         setRow(0);
         setCol(0);
     }
@@ -24,6 +32,10 @@ public class Entity {
     }
     public final void setCol(int col) {
         this.col = col;
+    }
+    public void setPosition(int row, int col) {
+        setRow(row);
+        setCol(col);
     }
 
     // Methods
