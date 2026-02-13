@@ -8,7 +8,7 @@ public class GameWorld {
     private int worldHeight;
     private int worldWidth;
     private Cell[][] world;
-    private Player player;
+    private final Player player;
     private final Scanner input;
     private boolean gameRunning;
 
@@ -127,17 +127,8 @@ public class GameWorld {
                 if (i == player.getRow() && j == player.getCol()) {
                     System.out.print(player.getIcon() + " "); // Player symbol
                 } else {
-                    Cell.Type cellType = world[i][j].getOccupationType();
-
-                    switch (cellType) {
-                        case WALL -> System.out.print("# "); // Block character for wall
-                        case COIN -> System.out.print("0 "); // Circle for coin
-                        case EXIT -> System.out.print("E "); // E for exit
-                        case PATH -> System.out.print("_ "); // Dot for empty space
-                        case ENTITY -> System.out.print(player.getIcon() + " "); // @ for entity
-                        default -> System.out.print("? "); // Unknown type
-                    }
-                }
+                    System.out.print(world[i][j]);
+                }    
             }
             System.out.println();
         }
@@ -200,7 +191,7 @@ public class GameWorld {
 
         try {
             moved = player.move(inputString.charAt(0));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException|StringIndexOutOfBoundsException e) {
             System.out.println("Invalid input! Use W/A/S/D to move or Q to quit.");
         }
 
