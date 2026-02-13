@@ -1,13 +1,30 @@
 package com;
 
+import com.utils.Ansi;
+
 public class Cell {
 
     public enum Type {
-        PATH,
-        WALL,
-        COIN,
-        EXIT,
-        ENTITY
+        PATH(Ansi.format(Ansi.BG_GREEN, '_')),
+        WALL(Ansi.format(Ansi.WHITE, '#')),
+        COIN(Ansi.format(Ansi.YELLOW, '0')),
+        EXIT(Ansi.format(Ansi.BG_BLUE, 'E')),
+        ENTITY(Ansi.format(Ansi.BLUE, '@'));
+
+        private final String value;
+
+        Type(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
     // Properties
@@ -37,6 +54,4 @@ public class Cell {
     public void setOccupationType(Type type) {
         this.occupationType = type;
     }
-
-    // Methods
 }
