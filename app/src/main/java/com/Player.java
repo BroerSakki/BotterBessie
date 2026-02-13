@@ -1,10 +1,14 @@
 package com;
 
+import com.utils.Ansi;
+
 public class Player extends Entity {
 
     // Properties
     private int score;
     private boolean hasWon;
+    private char icon;
+    private String color;
 
     // Constructors
     public Player() {
@@ -12,6 +16,8 @@ public class Player extends Entity {
         this.col = 0;
         this.score = 0;
         this.hasWon = false;
+        this.icon = '@';
+        this.color = Ansi.BLUE;
     }
 
     // Accessors}
@@ -22,8 +28,12 @@ public class Player extends Entity {
         this.row = row;
         this.col = col;
     }
+
     public int getScore() {
         return score;
+    }
+    public String getIcon() {
+        return Ansi.format(color, icon);
     }
 
     public void addScore(int points) {

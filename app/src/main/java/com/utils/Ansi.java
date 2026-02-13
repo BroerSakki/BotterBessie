@@ -40,6 +40,9 @@ public final class Ansi {
     public static String format(String style, String text) {
         return style + text + RESET;
     }
+    public static String format(String style, char text) {
+        return style + text + RESET;
+    }
 
     // =====================================================
     // COLORS

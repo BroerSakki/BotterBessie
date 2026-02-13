@@ -125,7 +125,7 @@ public class GameWorld {
             for (int j = 0; j < this.worldWidth; j++) {
                 // Check if player is at this position
                 if (i == player.getRow() && j == player.getCol()) {
-                    System.out.print("@ "); // Player symbol
+                    System.out.print(player.getIcon() + " "); // Player symbol
                 } else {
                     Cell.Type cellType = world[i][j].getOccupationType();
 
@@ -134,7 +134,7 @@ public class GameWorld {
                         case COIN -> System.out.print("0 "); // Circle for coin
                         case EXIT -> System.out.print("E "); // E for exit
                         case PATH -> System.out.print("_ "); // Dot for empty space
-                        case ENTITY -> System.out.print("@ "); // @ for entity
+                        case ENTITY -> System.out.print(player.getIcon() + " "); // @ for entity
                         default -> System.out.print("? "); // Unknown type
                     }
                 }
