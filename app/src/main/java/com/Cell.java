@@ -1,7 +1,7 @@
 package com;
 
-import com.utils.Ansi;
 import com.utils.Coin;
+import com.utils.Goal;
 import com.utils.Path;
 import com.utils.Wall;
 
@@ -11,8 +11,8 @@ public class Cell {
         PATH(new Path().toString()),
         WALL(new Wall().toString()),
         COIN(new Coin().toString()),
-        GOAL(Ansi.format(Ansi.BG_BLUE, 'E')),
-        ENTITY(Ansi.format(Ansi.BLUE, '@'));
+        GOAL(new Goal().toString()),
+        ENTITY(new Entity().toString());
 
         private final String value;
 
