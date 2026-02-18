@@ -40,7 +40,6 @@ public class Entity extends Node {
 
     // Methods
     public boolean move(int direction) {
-        //Local variables
         boolean validMove = false;
 
         switch (direction) {
@@ -57,6 +56,41 @@ public class Entity extends Node {
             case 3 -> {
                 this.row++;
                 validMove = true;
+            }
+            case 4 -> {
+                if (col > 0) {
+                    this.col--;
+                    validMove = true;
+                }
+            }
+            default -> throw new IllegalArgumentException("Invalid direction: " + direction + ". Valid directions are 1-4.");
+        }
+
+        return validMove;
+    }
+
+    // Optimized move method with boundary checking
+    public boolean move(int direction, int maxRow, int maxCol) {
+        boolean validMove = false;
+
+        switch (direction) {
+            case 1 -> {
+                if (row > 0) {
+                    this.row--;
+                    validMove = true;
+                }
+            }
+            case 2 -> {
+                if (col < maxCol - 1) {
+                    this.col++;
+                    validMove = true;
+                }
+            }
+            case 3 -> {
+                if (row < maxRow - 1) {
+                    this.row++;
+                    validMove = true;
+                }
             }
             case 4 -> {
                 if (col > 0) {

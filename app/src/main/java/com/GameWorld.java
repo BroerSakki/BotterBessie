@@ -11,14 +11,16 @@ public class GameWorld {
     private final Player player;
     private final Scanner input;
     private boolean gameRunning;
+    private final java.util.Random random; // Reuse random instance
 
-    // Contructor
+    // Constructor
     public GameWorld() {
         this.worldHeight = 0;
         this.worldWidth = 0;
         this.player = new Player();
         this.input = new Scanner(System.in);
         this.gameRunning = false;
+        this.random = new java.util.Random(); // Initialize once
     }
 
     // Accessors
@@ -51,7 +53,6 @@ public class GameWorld {
     }
 
     private void initializeWorld() {
-        java.util.Random random = new java.util.Random();
         boolean exitPlaced = false;
 
         for (int i = 0; i < worldHeight; i++) {
@@ -101,7 +102,6 @@ public class GameWorld {
     }
 
     private void placePlayer() {
-        java.util.Random random = new java.util.Random();
         boolean playerPlaced = false;
 
         // Try to place player on a non-wall cell
@@ -118,34 +118,31 @@ public class GameWorld {
 
     // Methods
     public void printWorld() {
-        // Clear the console to make it appear as if the world is printed over the previous one
-        clearConsole();
+        // Use efficient ANSI escape code instead of process creation
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         
+        // Use StringBuilder for efficient string concatenation
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.worldHeight; i++) {
             for (int j = 0; j < this.worldWidth; j++) {
                 // Check if player is at this position
                 if (i == player.getRow() && j == player.getCol()) {
-                    System.out.print(player.getIcon() + " "); // Player symbol
+                    sb.append(player.getIcon()).append(" "); // Player symbol
                 } else {
-                    System.out.print(world[i][j]);
+                    sb.append(world[i][j]);
                 }    
             }
-            System.out.println();
+            sb.append("\n");
         }
+        System.out.print(sb.toString());
     }
     
     // Method to clear the console using ANSI escape codes (works on most modern terminals)
+    // This is kept for backward compatibility but printWorld now uses direct ANSI codes
     public static void clearConsole() {
-        try {
-            String os = System.getProperty("os.name").toLowerCase();
-            if (os.contains("windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (java.io.IOException | InterruptedException e) {
-            // fallback or silent
-        }
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public void printGameState() {
@@ -190,20 +187,13 @@ public class GameWorld {
         boolean moved = false;
 
         try {
-            moved = player.move(inputString.charAt(0));
+            // Use optimized move method with boundary checking
+            moved = player.move(inputString.charAt(0), worldHeight, worldWidth);
         } catch (IllegalArgumentException|StringIndexOutOfBoundsException e) {
             System.out.println("Invalid input! Use W/A/S/D to move or Q to quit.");
         }
 
         if (moved) {
-            // Check boundaries
-            if (player.getRow() >= worldHeight) {
-                player.setPosition(worldHeight - 1, player.getCol());
-            }
-            if (player.getCol() >= worldWidth) {
-                player.setPosition(player.getRow(), worldWidth - 1);
-            }
-
             // Check what's at the new position
             Cell.Type cellType = world[player.getRow()][player.getCol()].getOccupationType();
 
@@ -238,3 +228,4 @@ public class GameWorld {
         System.out.println("Final Score: " + player.getScore());
     }
 }
+

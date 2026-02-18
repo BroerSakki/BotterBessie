@@ -10,7 +10,7 @@ public class Player extends Entity {
 
     // Constructors
     public Player() {
-        this('@', Ansi.BLUE);
+        this('@', Ansi.RED);
     }
     public Player(char icon, String style) {
         super(icon, style);
@@ -48,6 +48,27 @@ public class Player extends Entity {
             }
             case 'd' -> {
                 return move(2);
+            }
+            default -> {
+                throw new IllegalArgumentException("Invalid direction: '" + direction + "'. Valid directions are 'w', 'a', 's', or 'd'.");
+            }
+        }
+    }
+
+    // Optimized move method with boundary checking
+    public boolean move(char direction, int maxRow, int maxCol) {
+        switch (direction) {
+            case 'w' -> {
+                return move(1, maxRow, maxCol);
+            }
+            case 'a' -> {
+                return move(4, maxRow, maxCol);
+            }
+            case 's' -> {
+                return move(3, maxRow, maxCol);
+            }
+            case 'd' -> {
+                return move(2, maxRow, maxCol);
             }
             default -> {
                 throw new IllegalArgumentException("Invalid direction: '" + direction + "'. Valid directions are 'w', 'a', 's', or 'd'.");
