@@ -23,12 +23,14 @@ public class Player extends Entity {
         this.hasWon = won;
     }
 
-    public int getScore() {
-        return score;
+    public void setStamina(int stamina)
+    {
+        this.stamina = stamina;
     }
 
-    public void addScore(int points) {
-        this.score += points;
+    public int getStamina() 
+    {
+        return stamina;
     }
     public boolean hasWon() {
         return hasWon;
@@ -75,4 +77,4 @@ public class Player extends Entity {
             }
         }
     }
-}
+ }
