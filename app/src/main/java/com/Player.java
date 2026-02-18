@@ -10,7 +10,7 @@ public class Player extends Entity {
 
     // Constructors
     public Player() {
-        this('@', Ansi.RED);
+        this('@', Ansi.BLUE);
     }
     public Player(char icon, String style) {
         super(icon, style);

@@ -128,7 +128,7 @@ public class GameWorld {
             for (int j = 0; j < this.worldWidth; j++) {
                 // Check if player is at this position
                 if (i == player.getRow() && j == player.getCol()) {
-                    sb.append(player.getIcon()).append(" "); // Player symbol
+                    sb.append(player); // Player symbol
                 } else {
                     sb.append(world[i][j]);
                 }    
