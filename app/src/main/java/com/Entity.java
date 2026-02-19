@@ -34,8 +34,8 @@ public class Entity extends Node {
         this.col = col;
     }
     public void setPosition(int row, int col) {
-        setRow(row);
-        setCol(col);
+        this.row = row;
+        this.col = col;
     }
 
     // Methods
